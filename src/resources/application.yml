@@ -1,0 +1,73 @@
+spring:
+  profiles:
+    include:
+      - real-db
+    active: local
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MySQL57Dialect
+      hibernate.hbm2ddl.import_files_sql_extractor: org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
+      hibernate.current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+      hibernate.default_batch_fetch_size: ${chunkSize:100}
+#      hibernate.jdbc.use_scrollable_resultset: true
+    open-in-view: false
+  batch:
+    job:
+      names: ${job.name:NONE}
+
+logging.level:
+  org.springframework:
+#    jdbc.core.JdbcTemplate: DEBUG
+#    batch.item.database: DEBUG
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  datasource:
+    hikari:
+      jdbc-url: jdbc:h2:mem:username_here;MODE=MYSQL
+      username: sa
+      password:
+      driver-class-name: org.h2.Driver
+      auto-commit: false
+      maximumPoolSize: 10
+
+logging:
+  level:
+    com.querydsl.sql: DEBUG
+
+---
+spring:
+  config:
+    activate:
+      on-profile: mysql
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://localhost:3306/spring_batch
+      username: username_here
+      password: password_here
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+---
+spring:
+  config:
+    activate:
+      on-profile: aws
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql:aurora://cluster주소:포트,reader-cluster주소:포트/username_here?connectTimeout=1000&socketTimeout=600000
+      username: username_here
+      password: password_here
+      driver-class-name: org.mariadb.jdbc.Driver
+      auto-commit: false
+      idleTimeout: 30000      #30s
+      maxLifetime: 58000     #58s
+      connectionTimeout: 3000 # 3s
