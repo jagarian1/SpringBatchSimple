@@ -71,3 +71,6 @@ spring:
       idleTimeout: 30000      #30s
       maxLifetime: 58000     #58s
       connectionTimeout: 3000 # 3s
+
+
+      
