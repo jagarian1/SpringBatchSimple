@@ -215,6 +215,51 @@ public class UserRepository {
 4. 정적 리소스 경로 설정 확인
 5. 보안 설정(Spring Security)과의 통합
 
+### Project Directory Structure
+
+```plan text
+spring-boot-oracle-sample/
+├── pom.xml
+├── README.md
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── com
+│   │   │       └── example
+│   │   │           └── demo
+│   │   │               ├── Application.java
+│   │   │               ├── config
+│   │   │               │   ├── DatabaseConfig.java
+│   │   │               │   ├── ErrorConfig.java
+│   │   │               │   ├── FilterConfig.java
+│   │   │               │   └── WebConfig.java
+│   │   │               ├── controller
+│   │   │               │   └── SampleController.java
+│   │   │               ├── exception
+│   │   │               │   ├── DatabaseException.java
+│   │   │               │   └── GlobalExceptionHandler.java
+│   │   │               ├── service
+│   │   │               │   └── DatabaseService.java
+│   │   │               └── util
+│   │   │                   └── EncryptionUtil.java
+│   │   └── resources
+│   │       ├── application.yml
+│   │       ├── application-dev.yml
+│   │       ├── application-prod.yml
+│   │       └── logback-spring.xml
+│   └── test
+│       └── java
+│           └── com
+│               └── example
+│                   └── demo
+│                       ├── config
+│                       │   └── DatabaseConfigTest.java
+│                       └── service
+│                           └── DatabaseServiceTest.java
+└── README.md
+```
+
+
 ## 📄 라이선스
 이 프로젝트는 MIT 라이선스로 제공됩니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
 
